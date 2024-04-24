@@ -28,12 +28,19 @@ int main() {
     auto green = make_shared<lambertian>(color(.12, .45, .15));
     auto light = make_shared<diffuse_light>(color(15, 15, 15));
 
+    auto senna_texture = make_shared<image_texture>("senna.jpg");
+    auto senna_surface = make_shared<lambertian>(senna_texture);
+
+    auto senna_capacete_texture = make_shared<image_texture>("senna_capacete.jpg");
+    auto senna_capacete_surface = make_shared<lambertian>(senna_capacete_texture);
+
+
     // Cornell box sides
     world.add(make_shared<quad>(point3(555,0,0), vec3(0,0,555), vec3(0,555,0), green));
     world.add(make_shared<quad>(point3(0,0,555), vec3(0,0,-555), vec3(0,555,0), red));
     world.add(make_shared<quad>(point3(0,555,0), vec3(555,0,0), vec3(0,0,555), white));
     world.add(make_shared<quad>(point3(0,0,555), vec3(555,0,0), vec3(0,0,-555), white));
-    world.add(make_shared<quad>(point3(555,0,555), vec3(-555,0,0), vec3(0,555,0), white));
+    world.add(make_shared<quad>(point3(555,0,555), vec3(-555,0,0), vec3(0,555,0), senna_surface));
 
     // Light
     world.add(make_shared<quad>(point3(213,554,227), vec3(130,0,0), vec3(0,0,105), light));
@@ -48,17 +55,19 @@ int main() {
     auto glass = make_shared<dielectric>(1.5);
     world.add(make_shared<sphere>(point3(190,90,190), 90, glass));
 
+    world.add(make_shared<sphere>(point3(350,90,190), 70, senna_capacete_surface));
+
     // Light Sources
     hittable_list lights;
     auto m = shared_ptr<material>();
     lights.add(make_shared<quad>(point3(343,554,332), vec3(-130,0,0), vec3(0,0,-105), m));
-    lights.add(make_shared<sphere>(point3(190, 90, 190), 90, m));
+    //lights.add(make_shared<sphere>(point3(190, 90, 190), 90, m));
 
     camera cam;
 
     cam.aspect_ratio      = 1.0;
-    cam.image_width       = 600;
-    cam.samples_per_pixel = 100;
+    cam.image_width       = 300;
+    cam.samples_per_pixel = 20;
     cam.max_depth         = 50;
     cam.background        = color(0,0,0);
 
