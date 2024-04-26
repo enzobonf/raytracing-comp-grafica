@@ -4,3 +4,5 @@ build/
 /*.ppm
 
 /v3/*.ppm
+
+/*/**/*.rar
