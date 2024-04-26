@@ -41,7 +41,7 @@ int main() {
     auto interlagos_surface = make_shared<lambertian>(interlagos_texture);
 
     // Cornell box sides
-    //world.add(make_shared<quad>(point3(555,0,0), vec3(0,0,555), vec3(0,555,0), red));
+    world.add(make_shared<quad>(point3(555,0,0), vec3(0,0,555), vec3(0,555,0), red));
     world.add(make_shared<quad>(point3(0,0,555), vec3(0,0,-555), vec3(0,555,0), interlagos_surface));
     world.add(make_shared<quad>(point3(0,555,0), vec3(555,0,0), vec3(0,0,555), white));
     world.add(make_shared<quad>(point3(0,0,555), vec3(555,0,0), vec3(0,0,-555), white));
@@ -80,7 +80,7 @@ int main() {
 
     cam.aspect_ratio      = 1.0;
     cam.image_width       = 800;
-    cam.samples_per_pixel = 100;
+    cam.samples_per_pixel = 200;
     cam.max_depth         = 50;
     cam.background        = color(0,0,0);
 
